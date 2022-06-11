@@ -1,23 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
+import { Route } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import Dash from './pages/Dashboard';
+import Stock from './pages/Stock';
+import Nav from './components/Nav';
+import theData from './pages/stock-data';
 
-function App() {
+function App(props) {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Nav />
+      <Route exact path = '/' component={Home}/>
+
+      <Route path = '/about' component={About}/>
+
+      <Route path = '/stocks/:symbol'
+            render = {props => <Stock {...props} theData = {theData} />}
+        />
+
+      <Route path = '/stocks'
+            render = {props => <Dash {...props} theData= {theData} />}
+      />
     </div>
   );
 }
